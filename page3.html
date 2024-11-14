@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Tree Pyramid</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0px;
+            border: 100px;
+            overflow: hidden; /* Prevents the whole page from scrolling */
+            background-image: url("https://i.pinimg.com/originals/73/c6/cb/73c6cb1a213b18505a621e68851fdf64.jpg");
+        }
+
+        .viewport {
+            width: 80%;
+            height: 90%; /* Adjust this to control the viewport size */
+            overflow: hidden; /* Hides the overflowing content */
+            position: relative;
+            /* top: 0px; */
+            border: 2px solid #333;
+        }
+
+        .skill-tree {
+            width: 1920px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column-reverse; /* Reverse the column direction to have the levels appear from bottom to top */
+            align-items: center;
+            gap: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.3s ease; /* Smooth transition when changing view */
+            row-gap: 150px;
+        }
+
+        .level, .level0 {
+            display: flex;
+            justify-content: space-evenly;
+            gap: 10px;
+            width: 100%;
+            height: 200px;
+            text-align: center;
+            text-decoration: ;
+        }
+
+        .skill {
+            background-color: #fff;
+            border: 2px solid #333;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            vertical-align: middle;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px; 
+            padding: 20px;
+        }
+
+        /* .skill::before, .skill::after {
+            content: '';
+            position: absolute;
+            background-color: gray;
+        }
+
+        .skill[data-source="down"]::before {
+            height: 50px;
+            width: 2px;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .skill[data-source="up"]::before {
+            height: 50px;
+            width: 2px;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .skill[data-source="hor"]::before {
+            height: 2px;
+            width: 50px;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
+        } */
+
+        .skill:hover {
+            background-color: #e0e0e0; 
+            transform: scale(1.5);
+        }
+
+        /* Center the skill blocks under their parent */
+        #level-1 {
+            gap: 300px; 
+        }
+
+        #level-2 {
+            gap: 150px; 
+        }
+
+        #level-1 .skill {
+            width: 300px;
+        }
+
+        #level-2 .skill {
+            width: 200px;
+        }
+
+        #level-3 .skill {
+            width: 150px;
+        }
+
+        .level0 {
+            position: sticky;
+            opacity: 0.7;
+            bottom: 0px;
+            gap: 0px;
+            padding: 25px;
+            background-color: #706a6a;
+            height: 25px;
+            pointer-events: none;
+
+        }
+
+        .progress {
+            display: flex;
+            flex-grow: 1;
+            justify-content: space-evenly;
+            align-items: center;
+            align-content: space-evenly;
+            text-align: left;
+            /*cursor: pointer;
+            width: 50px;
+            height: 50px;
+            vertical-align: middle; */
+            /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+            /* margin: 20px; 
+            padding: 20px; */
+        }
+
+        .unlocked {
+            background-color: rgb(132, 250, 132);
+        }
+
+        .locked {
+            background-color: rgb(253, 95, 95);
+        }
+
+        .dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .dropdown .dropdown-content {
+            display: none;
+            position: absolute;
+            width: 100%;
+            overflow: auto;
+            box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+            background-color: antiquewhite;
+            border-radius: 10px;
+            margin: 10px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="viewport">
+        <div class="skill-tree">
+            <div class="level0" id="progress">
+                <div class="progress" id="progress1">Front-End
+                    <div class="meter">
+                        <span style="width: 25%"></span>
+                    </div>
+                </div>
+                <div class="progress" id="progress2">Back-End</div>
+                <div class="progress" id="progress2">Full-Stack</div>
+                <div class="progress" id="progress3">Cybersecurity</div>
+            </div>
+            <div class="level" id="level-1">
+                <div class="skill" data-source="down">Front-End Development</div>
+                <div class="skill" data-source="down">Back-End Development</div>
+                <div class="skill" data-source="down">Full-Stack Development</div>
+            </div>
+            <div class="level" id="level-2"> 
+                <div class="skill" data-source="up down">HTML & CSS</div>
+                <div class="skill" data-source="up down">JavaScript</div>
+                <div class="skill" data-source="up down">UI/UX Design</div>
+                <div class="skill" data-source="up down">Server-Side Programming</div>
+                <div class="skill" data-source="up down">Databases</div>
+                <div class="skill" data-source="up down">Cloud Computing</div>
+                <div class="skill" data-source="up down">Integration Skills</div>
+            </div>
+            <div class="level" id="level-3">
+                <div class="skill unlocked dropdown" data-source="up">Basic HTML & CSS
+                    <div class="dropdown-content">Create simple web pages</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Responsive Design
+                    <div class="dropdown-content">Build responsive and mobile-friendly websites</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">CSS Frameworks
+                    <div class="dropdown-content">Use frameworks like Bootstrap, Tailwind CSS</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Advanced CSS
+                    <div class="dropdown-content">Master CSS Grid, Flexbox, animations</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Basic JavaScript
+                    <div class="dropdown-content">Understand basic syntax and functions</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">DOM Manipulation
+                    <div class="dropdown-content">Interact with the DOM using JavaScript</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">JavaScript Frameworks
+                    <div class="dropdown-content">Learn frameworks like React, Angular, Vue</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Advanced JavaScript
+                    <div class="dropdown-content">Master ES6+, async programming, and advanced concepts</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Basic Design Principles
+                    <div class="dropdown-content">Understand basic UI/UX principles</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Wireframing
+                    <div class="dropdown-content">Create wireframes for web projects</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Prototyping
+                    <div class="dropdown-content">Build interactive prototypes using tools like Figma, Sketch</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Advanced UI/UX
+                    <div class="dropdown-content">Conduct user testing and improve designs based on feedback</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Basic Server-Side
+                    <div class="dropdown-content">Understand the basics of server-side programming (Node.js, Python)</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">RESTful APIs
+                    <div class="dropdown-content">Build and consume RESTful APIs</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Authentication & Authorization
+                    <div class="dropdown-content">ThiImplement user authentication and authorization.</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Advanced Server-Side
+                    <div class="dropdown-content">Optimize server performance, scalability</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Basic SQL/NoSQL
+                    <div class="dropdown-content">Understand basic database concepts</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">CRUD Operations
+                    <div class="dropdown-content">Implement CRUD operations</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Database Design
+                    <div class="dropdown-content">Design efficient database schemas</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Advanced Database Management
+                    <div class="dropdown-content">Optimize queries, use indexing</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Basic Cloud Services
+                    <div class="dropdown-content">Understand basic cloud concepts (AWS, Azure, GCP)</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Deployment
+                    <div class="dropdown-content">Deploy applications to the cloud</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Scaling & Load Balancing
+                    <div class="dropdown-content">Implement scaling and load balancing</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Advanced Cloud Architecture
+                    <div class="dropdown-content">Design and manage complex cloud architectures</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Basic Integration
+                    <div class="dropdown-content">Combine front-end and back-end components</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">API Integration
+                    <div class="dropdown-content">Integrate third-party APIs</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">WebSockets
+                    <div class="dropdown-content">Implement real-time communication</div>
+                </div>
+                <div class="skill unlocked dropdown" data-source="up">Advanced Integration
+                    <div class="dropdown-content">Create a complex, integrated full-stack application</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const skills = document.querySelectorAll('.skill');
+            const skillTree = document.querySelector('.skill-tree');
+            const viewport = document.querySelector('.viewport');
+
+            skills.forEach(skill => {
+                skill.addEventListener('click', () => {
+                    skill.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center',
+                        inline: 'center'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
